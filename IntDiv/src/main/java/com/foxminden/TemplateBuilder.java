@@ -3,7 +3,6 @@ package com.foxminden;
 public class TemplateBuilder {
 
     private TemplateBuilder() {
-        throw new IllegalStateException();
     }
 
     public static Template createTemplate(Integer divident, Integer divisor) {

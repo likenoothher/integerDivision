@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class TemplateFormatter {
     private static int pointerPosition = 1;
 
+    private TemplateFormatter() {
+    }
+
     public static String formatTemplate(Template template) {
         String result;
         result = getHeader(template);
