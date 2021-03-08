@@ -41,10 +41,6 @@ public class Template {
         return tempDevisor;
     }
 
-    public void setTempDevisor(ArrayList<Integer> tempDevisor) {
-        this.tempDevisor = tempDevisor;
-    }
-
     public Integer getEndResult() {
         return endResult;
     }
