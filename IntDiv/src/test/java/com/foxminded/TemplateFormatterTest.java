@@ -1,4 +1,4 @@
-package com.foxminden;
+package com.foxminded;
 
 import static org.junit.Assert.*;
 
