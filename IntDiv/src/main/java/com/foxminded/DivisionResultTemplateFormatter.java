@@ -122,7 +122,7 @@ public class DivisionResultTemplateFormatter {
     }
 
     private int getCountsOfDigits(int number) {
-        return (number == 0) ? 1 : (int) Math.ceil(Math.log10(Math.abs(number) + 0.5));
+        return (number == 0) ? 1 : (int) Math.log10(number) + 1;
     }
 
     private int getLengthDifferenceOfNumbers(int number1, int number2) {
