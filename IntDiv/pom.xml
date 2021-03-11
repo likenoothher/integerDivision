@@ -10,6 +10,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit.ver>4.13</junit.ver>
         <surefire.ver>2.22.0</surefire.ver>
+        <trove4j.ver>3.0.3</trove4j.ver>
         <editorconfig.ver>0.1.1</editorconfig.ver>
     </properties>
 
@@ -17,7 +18,7 @@
         <dependency>
             <groupId>net.sf.trove4j</groupId>
             <artifactId>trove4j</artifactId>
-            <version>3.0.3</version>
+            <version>${trove4j.ver}</version>
         </dependency>
 
         <dependency>
