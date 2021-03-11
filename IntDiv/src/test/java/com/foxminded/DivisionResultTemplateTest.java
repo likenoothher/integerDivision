@@ -4,16 +4,21 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TemplateBuilerTest {
+public class DivisionResultTemplateTest {
 
     @Test
-    public void whenDevisorIsZero_throwIAException() {
-        assertThrows(IllegalArgumentException.class, () -> TemplateBuilder.createTemplate(1224, 0));
+    public void whenDivisorIsZero_throwIAException() {
+        assertThrows(IllegalArgumentException.class, () -> DivisionResultTemplate.createTemplate(1224,0));
+    }
+
+    @Test
+    public void whenDividentSmallerDivisor_throwIAException() {
+        assertThrows(IllegalArgumentException.class, () -> DivisionResultTemplate.createTemplate(1224,5000));
     }
 
     @Test
     public void whenOneIterationDivision_thenCreateTemplateIntermediateArraysVariableSizeEquals1() {
-        Template result = TemplateBuilder.createTemplate(25, 5);
+        DivisionResultTemplate result = DivisionResultTemplate.createTemplate(25, 5);
 
         assertEquals(Integer.valueOf(result.getDividend()), new Integer(25));
         assertEquals(Integer.valueOf(result.getDivisor()), new Integer(5));
@@ -26,7 +31,7 @@ public class TemplateBuilerTest {
 
     @Test
     public void whenMultiIterationDivision_thenCreateIntermediateTempArraysVariableSizeMore1() {
-        Template result = TemplateBuilder.createTemplate(518003, 42);
+        DivisionResultTemplate result = DivisionResultTemplate.createTemplate(518003, 42);
 
         assertEquals(Integer.valueOf(result.getDividend()), new Integer(518003));
         assertEquals(Integer.valueOf(result.getDivisor()), new Integer(42));
@@ -42,7 +47,7 @@ public class TemplateBuilerTest {
 
     @Test
     public void whenMultiIterationDivisionWithZeroTransReminder_thenCreateTemplateIntermediateArraysVariableSizeMore1WithZerosIncluded() {
-        Template result = TemplateBuilder.createTemplate(1001001, 1);
+        DivisionResultTemplate result = DivisionResultTemplate.createTemplate(1001001, 1);
 
         assertEquals(Integer.valueOf(result.getDividend()), new Integer(1001001));
         assertEquals(Integer.valueOf(result.getDivisor()), new Integer(1));
@@ -54,18 +59,4 @@ public class TemplateBuilerTest {
         assertArrayEquals(result.getIntermediateDividends().toArray(), expectedArrayOfDividends);
         assertArrayEquals(result.getIntermediateDivisors().toArray(), expectedArrayOfDivisors);
     }
-
-    @Test
-    public void whenDividendIsZero_thenCreateTemplateIntermediateArraysVariableSizeEquals1() {
-        Template result = TemplateBuilder.createTemplate(0, 100);
-
-        assertEquals(Integer.valueOf(result.getDividend()), new Integer(0));
-        assertEquals(Integer.valueOf(result.getDivisor()), new Integer(100));
-        assertEquals(Integer.valueOf(result.getFinalResult()), new Integer(0));
-        assertEquals(Integer.valueOf(result.getFinalReminder()), new Integer(0));
-
-        assertEquals(result.getIntermediateDividends().get(result.getIntermediateDividends().size() - 1), 0);
-        assertEquals(result.getIntermediateDivisors().get(result.getIntermediateDividends().size() - 1), 0);
-    }
-
 }

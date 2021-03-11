@@ -4,23 +4,23 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TemplateFormatterTest {
+public class DivisionResultTemplateFormatterTest {
 
     @Test
     public void whenOneIterationDivisionWthOutTransientZeroBlocks_thenOneBlockPrintSkipedGetBodyMethod() {
-        Template template = TemplateBuilder.createTemplate(20, 20);
+        DivisionResultTemplate template = DivisionResultTemplate.createTemplate(20, 20);
         String expected =
                   "_20|20\n"
                 + " 20|--\n"
                 + " --|1\n"
                 + "  0";
-        String result = TemplateFormatter.formatTemplate(template);
+        String result = new DivisionResultTemplateFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
 
     @Test
     public void whenMultiIterationDivisionWthOutTransientZeroBlocks_thenMultiBlockPrint() {
-        Template template = TemplateBuilder.createTemplate(78945, 4);
+        DivisionResultTemplate template = DivisionResultTemplate.createTemplate(78945, 4);
         String expected =
                     "_78945|4\n"
                   + " 4    |-----\n"
@@ -38,13 +38,13 @@ public class TemplateFormatterTest {
                   + "    24\n"
                   + "    --\n"
                   + "     1";
-        String result = TemplateFormatter.formatTemplate(template);
+        String result = new DivisionResultTemplateFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
 
     @Test
     public void whenMultiIterationDivisionWithTransientZeroBlocks_thenMultiBlockPrintSkipedBlocksWithZeroDivision() {
-        Template template = TemplateBuilder.createTemplate(1001001, 1);
+        DivisionResultTemplate template = DivisionResultTemplate.createTemplate(1001001, 1);
         String expected =
                   "_1001001|1\n"
                 + " 1      |-------\n"
@@ -56,13 +56,13 @@ public class TemplateFormatterTest {
                 + "       1\n"
                 + "       -\n"
                 + "       0";
-        String result = TemplateFormatter.formatTemplate(template);
+        String result = new DivisionResultTemplateFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
 
     @Test
     public void whenMultiIterationDivisionOneOfComponentIsNegatinve_thenTransformNegativeComponentToPositiveMultiBlockPrint() {
-        Template template = TemplateBuilder.createTemplate(78945, -4);
+        DivisionResultTemplate template = DivisionResultTemplate.createTemplate(78945, -4);
         String expected =
                     "_78945|4\n"
                   + " 4    |-----\n"
@@ -80,7 +80,7 @@ public class TemplateFormatterTest {
                   + "    24\n"
                   + "    --\n"
                   + "     1";
-        String result = TemplateFormatter.formatTemplate(template);
+        String result = new DivisionResultTemplateFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
 

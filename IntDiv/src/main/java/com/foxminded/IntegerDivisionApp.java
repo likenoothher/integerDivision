@@ -3,13 +3,11 @@ package com.foxminded;
 class IntegerDivisionApp {
 
     public static void main(String[] args) {
-        buildDivision(500054, 100);
+        DivisionResultTemplate drt = DivisionResultTemplate.createTemplate(78945,45);
+        DivisionResultTemplate drt2 = DivisionResultTemplate.createTemplate(7815,20);
+        DivisionResultTemplateFormatter tf = new DivisionResultTemplateFormatter();
+        System.out.println(tf.getStringRepresentation(drt));
+        System.out.println(tf.getStringRepresentation(drt2));
 
     }
-
-    private static void buildDivision(int dividend, int divisor) {
-        Template template = TemplateBuilder.createTemplate(dividend, divisor);
-        System.out.println(TemplateFormatter.formatTemplate(template));
-    }
-
 }
