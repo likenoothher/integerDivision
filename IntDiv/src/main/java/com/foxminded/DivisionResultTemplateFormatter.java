@@ -22,7 +22,7 @@ public class DivisionResultTemplateFormatter {
 
     public String getStringRepresentation(DivisionResultTemplate template) {
         extractTemplateVariables(template);
-        createUtilityBodyStrings();
+        createHeaderUtilityStrings();
         String templateRepresentation = getHeader();
 
         if (template.getIntermediateDividends().size() > 1) {
@@ -46,7 +46,7 @@ public class DivisionResultTemplateFormatter {
         this.intermediateDivisors = template.getIntermediateDivisors();
     }
 
-    private void createUtilityBodyStrings() {
+    private void createHeaderUtilityStrings() {
         Map<String, String> utilityBodyStrings = new HashMap();
         utilityBodyStrings.put("beforeDivisorIndent",
         addSomeSymbols(" ", getLengthDifferenceOfNumbers(firstIntermediateDividend, firstIntermediateDivisor)));
