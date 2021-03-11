@@ -18,7 +18,7 @@ public class DivisionResultTemplateFormatter {
 
     private int pointerPosition = 0;
 
-    Map<String, String> utilityBodyStrings;
+    Map<String, String> utilityHeaderStrings;
 
     public String getStringRepresentation(DivisionResultTemplate template) {
         extractTemplateVariables(template);
@@ -54,15 +54,15 @@ public class DivisionResultTemplateFormatter {
                 addSomeSymbols(" ", getCountsOfDigits(dividend) - utilityBodyStrings.get("beforeDivisorIndent").length()
                         - getCountsOfDigits(firstIntermediateDivisor)));
         utilityBodyStrings.put("divisorUnderline", addSomeSymbols("-", getCountsOfDigits(firstIntermediateDivisor)));
-        this.utilityBodyStrings = utilityBodyStrings;
+        this.utilityHeaderStrings = utilityBodyStrings;
 
     }
 
     private String getHeader() {
-        String beforeDivisorIndent = utilityBodyStrings.get("beforeDivisorIndent");
-        String afterDivisorIndent = utilityBodyStrings.get("afterDivisorIndent");
+        String beforeDivisorIndent = utilityHeaderStrings.get("beforeDivisorIndent");
+        String afterDivisorIndent = utilityHeaderStrings.get("afterDivisorIndent");
         String divisorResultSeparator = getDivisorResultSeparator();
-        String divisorUnderline = utilityBodyStrings.get("divisorUnderline");
+        String divisorUnderline = utilityHeaderStrings.get("divisorUnderline");
 
         StringBuilder header = new StringBuilder();
         header.append(String.format("_%d|%d\n", dividend, divisor));
