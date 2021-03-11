@@ -12,7 +12,7 @@ public class DivisionResultTemplateTest {
     }
 
     @Test
-    public void whenDividentSmallerDivisor_throwIAException() {
+    public void whenDividendSmallerDivisor_throwIAException() {
         assertThrows(IllegalArgumentException.class, () -> DivisionResultTemplate.createTemplate(1224,5000));
     }
 

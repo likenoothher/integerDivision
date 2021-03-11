@@ -50,7 +50,7 @@ public class DivisionResultTemplateFormatter {
         Map<String, String> utilityBodyStrings = new HashMap();
         utilityBodyStrings.put("beforeDivisorIndent",
         addSomeSymbols(" ", getLengthDifferenceOfNumbers(firstIntermediateDividend, firstIntermediateDivisor)));
-        utilityBodyStrings.put("afterDevisorIndent",
+        utilityBodyStrings.put("afterDivisorIndent",
                 addSomeSymbols(" ", getCountsOfDigits(dividend) - utilityBodyStrings.get("beforeDivisorIndent").length()
                         - getCountsOfDigits(firstIntermediateDivisor)));
         utilityBodyStrings.put("divisorUnderline", addSomeSymbols("-", getCountsOfDigits(firstIntermediateDivisor)));
@@ -60,16 +60,16 @@ public class DivisionResultTemplateFormatter {
 
     private String getHeader() {
         String beforeDivisorIndent = utilityBodyStrings.get("beforeDivisorIndent");
-        String afterDevisorIndent = utilityBodyStrings.get("afterDevisorIndent");
-        String devisorResultSeparator = getDevisorResultSeparator();
+        String afterDivisorIndent = utilityBodyStrings.get("afterDivisorIndent");
+        String divisorResultSeparator = getDivisorResultSeparator();
         String divisorUnderline = utilityBodyStrings.get("divisorUnderline");
 
         StringBuilder header = new StringBuilder();
         header.append(String.format("_%d|%d\n", dividend, divisor));
-        header.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor, afterDevisorIndent,
-                devisorResultSeparator));
+        header.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor, afterDivisorIndent,
+                divisorResultSeparator));
         header.append(
-                String.format(" %s%s%s|%d\n", beforeDivisorIndent, divisorUnderline, afterDevisorIndent, finalResult));
+                String.format(" %s%s%s|%d\n", beforeDivisorIndent, divisorUnderline, afterDivisorIndent, finalResult));
 
         pointerPosition = getPointerPosition(firstIntermediateDividend, firstIntermediateDivisor);
 
@@ -129,7 +129,7 @@ public class DivisionResultTemplateFormatter {
         return Math.abs(getCountsOfDigits(number1) - getCountsOfDigits(number2));
     }
 
-    private String getDevisorResultSeparator() {
+    private String getDivisorResultSeparator() {
         if (getCountsOfDigits(divisor) >= getCountsOfDigits(finalResult)) {
             return new String(addSomeSymbols("-", getCountsOfDigits(divisor)));
         } else {

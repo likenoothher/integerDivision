@@ -61,7 +61,7 @@ public class DivisionResultTemplate {
 
     private static void checkInitialInput(int dividend, int divisor) {
         if (dividend < divisor) {
-            throw new IllegalArgumentException("Divisor shouldn't be larger divident");
+            throw new IllegalArgumentException("Divisor shouldn't be larger dividend");
         }
         if (divisor == 0) {
             throw new IllegalArgumentException("Divisor shouldn't be zero");
