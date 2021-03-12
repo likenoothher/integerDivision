@@ -2,7 +2,7 @@ package com.foxminded;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class DivisionResultTemplate {
+public class DivisionResultValues {
     private int dividend;
     private int divisor;
     private TIntArrayList intermediateDividends;
@@ -10,19 +10,19 @@ public class DivisionResultTemplate {
     private int finalResult;
     private int finalReminder;
 
-    private DivisionResultTemplate() {
+    private DivisionResultValues() {
 
     }
 
-    static DivisionResultTemplate createTemplate(int dividend, int divisor) {
-        checkInitialInput(dividend,divisor);
-        DivisionResultTemplate template = new DivisionResultTemplate();
+    static DivisionResultValues createTemplate(int dividend, int divisor) {
+        checkDivisor(divisor);
+        DivisionResultValues template = new DivisionResultValues();
         initializeTemplateFields(template, dividend, divisor);
         fillIntermediateValues(template, template.dividend, template.divisor);
         return template;
     }
 
-    private static void initializeTemplateFields(DivisionResultTemplate template, int dividend, int divisor) {
+    private static void initializeTemplateFields(DivisionResultValues template, int dividend, int divisor) {
         template.dividend = Math.abs(dividend);
         template.divisor = Math.abs(divisor);
         template.finalResult = Math.abs(dividend / divisor);
@@ -31,38 +31,39 @@ public class DivisionResultTemplate {
         template.intermediateDivisors = new TIntArrayList();
     }
 
-    private static void fillIntermediateValues(DivisionResultTemplate template, int dividend, int divisor) {
-        String[] dividendDigits = String.valueOf(dividend).split("");
-        StringBuilder intermediateDividendSB = new StringBuilder();
+    private static void fillIntermediateValues(DivisionResultValues template, int dividend, int divisor) {
+        int[] dividendDigits = splitNumber(dividend);
+        int intermediaeteDividend = 0;
 
         for (int i = 0; i < dividendDigits.length; i++) {
-            intermediateDividendSB.append(dividendDigits[i]);
-            int intermediaeteDividend = Integer.parseInt(intermediateDividendSB.toString());
+            intermediaeteDividend = intermediaeteDividend * 10 + dividendDigits[i];
 
-            if (intermediaeteDividend >= divisor || isDividendZero(intermediateDividendSB)) {
+            if (intermediaeteDividend >= divisor || intermediaeteDividend == 0) {
                 putValuesToTemplate(template, intermediaeteDividend, divisor);
-                intermediateDividendSB.setLength(0);
-
-                if (intermediaeteDividend % divisor != 0) {
-                    intermediateDividendSB.append(String.valueOf(intermediaeteDividend % divisor));
-                }
+                intermediaeteDividend = intermediaeteDividend % divisor;
             }
         }
     }
 
-    private static void putValuesToTemplate(DivisionResultTemplate template,int dividend, int divisor) {
+    private static int[] splitNumber(int number) {
+        if (number == 0) {
+            return new int[] { 0 };
+        } else {
+            int[] digits = new int[(int) Math.log10(number) + 1];
+            for (int i = 0; i < digits.length; i++) {
+                digits[digits.length - 1 - i] = number % 10;
+                number = number / 10;
+            }
+            return digits;
+        }
+    }
+
+    private static void putValuesToTemplate(DivisionResultValues template, int dividend, int divisor) {
         template.addToIntermediateDividends(dividend);
         template.addToIntermediateDivisors((dividend / divisor) * divisor);
     }
 
-    private static boolean isDividendZero(StringBuilder intermediateDividend) {
-        return intermediateDividend.toString().equals("0");
-    }
-
-    private static void checkInitialInput(int dividend, int divisor) {
-        if (dividend < divisor) {
-            throw new IllegalArgumentException("Divisor shouldn't be larger dividend");
-        }
+    private static void checkDivisor(int divisor) {
         if (divisor == 0) {
             throw new IllegalArgumentException("Divisor shouldn't be zero");
         }
@@ -85,11 +86,11 @@ public class DivisionResultTemplate {
     }
 
     public TIntArrayList getIntermediateDividends() {
-        return intermediateDividends;
+        return new TIntArrayList(intermediateDividends);
     }
 
     public TIntArrayList getIntermediateDivisors() {
-        return intermediateDivisors;
+        return new TIntArrayList(intermediateDivisors);
     }
 
     public int getFinalResult() {

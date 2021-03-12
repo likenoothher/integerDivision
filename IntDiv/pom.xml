@@ -6,8 +6,8 @@
   
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
         <junit.ver>4.13</junit.ver>
         <surefire.ver>2.22.0</surefire.ver>
         <trove4j.ver>3.0.3</trove4j.ver>

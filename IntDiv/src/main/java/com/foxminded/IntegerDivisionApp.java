@@ -3,9 +3,9 @@ package com.foxminded;
 class IntegerDivisionApp {
 
     public static void main(String[] args) {
-        DivisionResultTemplate drt = DivisionResultTemplate.createTemplate(78945,45);
-        DivisionResultTemplate drt2 = DivisionResultTemplate.createTemplate(7815,20);
-        DivisionResultTemplateFormatter tf = new DivisionResultTemplateFormatter();
+        DivisionResultValues drt = DivisionResultValues.createTemplate(0,25);
+        DivisionResultValues drt2 = DivisionResultValues.createTemplate(7815,20);
+        DivisionValuesFormatter tf = new DivisionValuesFormatter();
         System.out.println(tf.getStringRepresentation(drt));
         System.out.println(tf.getStringRepresentation(drt2));
 
