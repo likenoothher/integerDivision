@@ -8,7 +8,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenOneIterationDivisionWthOutTransientZeroBlocks_thenOneBlockPrintSkipedGetBodyMethod() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(20, 20);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(20, 20);
         String expected =
                   "_20|20\n"
                 + " 20|--\n"
@@ -20,7 +20,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenDividendIsZeroDivisorIsPositive_thenPrintInputAndResult() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(0, 45);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(0, 45);
         String expected =
                   "0|45\n"
                 + " |--\n"
@@ -31,7 +31,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenDividendIsZeroDivisorIsNegative_thenDivisorPositivePrintInputAndResult() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(0, -45);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(0, -45);
         String expected =
                   "0|45\n"
                 + " |--\n"
@@ -42,7 +42,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenMultiIterationDivisionWthOutTransientZeroBlocks_thenMultiBlockPrint() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(78945, 4);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(78945, 4);
         String expected =
                     "_78945|4\n"
                   + " 4    |-----\n"
@@ -66,7 +66,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenMultiIterDivisionOneComponentNeg_thenNegComponentToPositiveMultiBlockPrint() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(78945, -4);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(78945, -4);
         String expected =
                     "_78945|4\n"
                   + " 4    |-----\n"
@@ -90,7 +90,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenMultiIterDivisionTwoComponentNeg_thenNegeComponentToPositiveMultiBlockPrint() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(-78945, -4);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(-78945, -4);
         String expected =
                     "_78945|4\n"
                   + " 4    |-----\n"
@@ -114,7 +114,7 @@ public class DivisionValuesFormatterTest {
 
     @Test
     public void whenMultiIterationDivisionWithTransientZeroBlocks_thenMultiBlockPrintSkipedBlocksWithZeroDivision() {
-        DivisionResultValues template = DivisionResultValues.createTemplate(1001001, 1);
+        DivisionResultValues template = DivisionResultValues.createSetOfValues(1001001, 1);
         String expected =
                   "_1001001|1\n"
                 + " 1      |-------\n"

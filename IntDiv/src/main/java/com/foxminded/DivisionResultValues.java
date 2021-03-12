@@ -14,24 +14,24 @@ public class DivisionResultValues {
 
     }
 
-    static DivisionResultValues createTemplate(int dividend, int divisor) {
+    static DivisionResultValues createSetOfValues(int dividend, int divisor) {
         checkDivisor(divisor);
-        DivisionResultValues template = new DivisionResultValues();
-        initializeTemplateFields(template, dividend, divisor);
-        fillIntermediateValues(template, template.dividend, template.divisor);
-        return template;
+        DivisionResultValues setOfValues = new DivisionResultValues();
+        initializesetOfValuesFields(setOfValues, dividend, divisor);
+        fillIntermediateValues(setOfValues, setOfValues.dividend, setOfValues.divisor);
+        return setOfValues;
     }
 
-    private static void initializeTemplateFields(DivisionResultValues template, int dividend, int divisor) {
-        template.dividend = Math.abs(dividend);
-        template.divisor = Math.abs(divisor);
-        template.finalResult = Math.abs(dividend / divisor);
-        template.finalReminder = Math.abs(dividend % divisor);
-        template.intermediateDividends = new TIntArrayList();
-        template.intermediateDivisors = new TIntArrayList();
+    private static void initializesetOfValuesFields(DivisionResultValues setOfValues, int dividend, int divisor) {
+        setOfValues.dividend = Math.abs(dividend);
+        setOfValues.divisor = Math.abs(divisor);
+        setOfValues.finalResult = Math.abs(dividend / divisor);
+        setOfValues.finalReminder = Math.abs(dividend % divisor);
+        setOfValues.intermediateDividends = new TIntArrayList();
+        setOfValues.intermediateDivisors = new TIntArrayList();
     }
 
-    private static void fillIntermediateValues(DivisionResultValues template, int dividend, int divisor) {
+    private static void fillIntermediateValues(DivisionResultValues setOfValues, int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
         int intermediaeteDividend = 0;
 
@@ -39,7 +39,7 @@ public class DivisionResultValues {
             intermediaeteDividend = intermediaeteDividend * 10 + dividendDigits[i];
 
             if (intermediaeteDividend >= divisor || intermediaeteDividend == 0) {
-                putValuesToTemplate(template, intermediaeteDividend, divisor);
+                putValuesTosetOfValues(setOfValues, intermediaeteDividend, divisor);
                 intermediaeteDividend = intermediaeteDividend % divisor;
             }
         }
@@ -58,9 +58,9 @@ public class DivisionResultValues {
         }
     }
 
-    private static void putValuesToTemplate(DivisionResultValues template, int dividend, int divisor) {
-        template.addToIntermediateDividends(dividend);
-        template.addToIntermediateDivisors((dividend / divisor) * divisor);
+    private static void putValuesTosetOfValues(DivisionResultValues setOfValues, int dividend, int divisor) {
+        setOfValues.addToIntermediateDividends(dividend);
+        setOfValues.addToIntermediateDivisors((dividend / divisor) * divisor);
     }
 
     private static void checkDivisor(int divisor) {
@@ -103,7 +103,7 @@ public class DivisionResultValues {
 
     @Override
     public String toString() {
-        return "Template [dividend=" + dividend + ", divisor=" + divisor + ", intermediateDividends="
+        return "setOfValues [dividend=" + dividend + ", divisor=" + divisor + ", intermediateDividends="
                 + intermediateDividends + ", intermediateDivisors=" + intermediateDivisors + ", finalResult="
                 + finalResult + ", finalReminder=" + finalReminder + "]";
     }

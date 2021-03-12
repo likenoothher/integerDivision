@@ -24,33 +24,33 @@ public class DivisionValuesFormatter {
     private final String AFTER_DIVISOR_INDENT = "afterDivisorIndent";
     private final String DIVISOR_UNDERLINE = "divisorUnderline";
 
-    public String getStringRepresentation(DivisionResultValues template) {
-        extractTemplateVariables(template);
+    public String getStringRepresentation(DivisionResultValues setOfValues) {
+        extractsetOfValuesVariables(setOfValues);
         fillHeaderUtilityStrings();
-        StringBuilder templateRepresentation = new StringBuilder();
-        getHeader(templateRepresentation);
+        StringBuilder setOfValuesRepresentation = new StringBuilder();
+        getHeader(setOfValuesRepresentation);
 
-        if (template.getIntermediateDividends().size() > 1) {
-            getDivisionChain(templateRepresentation);
+        if (setOfValues.getIntermediateDividends().size() > 1) {
+            getDivisionChain(setOfValuesRepresentation);
         }
 
-        getReminder(templateRepresentation);
+        getReminder(setOfValuesRepresentation);
 
         pointerPosition = 0;
         utilityHeaderStrings.clear();
 
-        return templateRepresentation.toString();
+        return setOfValuesRepresentation.toString();
     }
 
-    private void extractTemplateVariables(DivisionResultValues template) {
-        this.dividend = template.getDividend();
-        this.divisor = template.getDivisor();
-        this.firstIntermediateDividend = template.getIntermediateDividends().get(0);
-        this.firstIntermediateDivisor = template.getIntermediateDivisors().get(0);
-        this.finalResult = template.getFinalResult();
-        this.finalReminder = template.getFinalReminder();
-        this.intermediateDividends = template.getIntermediateDividends();
-        this.intermediateDivisors = template.getIntermediateDivisors();
+    private void extractsetOfValuesVariables(DivisionResultValues setOfValues) {
+        this.dividend = setOfValues.getDividend();
+        this.divisor = setOfValues.getDivisor();
+        this.firstIntermediateDividend = setOfValues.getIntermediateDividends().get(0);
+        this.firstIntermediateDivisor = setOfValues.getIntermediateDivisors().get(0);
+        this.finalResult = setOfValues.getFinalResult();
+        this.finalReminder = setOfValues.getFinalReminder();
+        this.intermediateDividends = setOfValues.getIntermediateDividends();
+        this.intermediateDivisors = setOfValues.getIntermediateDivisors();
     }
 
     private void fillHeaderUtilityStrings() {
@@ -63,43 +63,43 @@ public class DivisionValuesFormatter {
 
     }
 
-    private void getHeader(StringBuilder templateRepresentation) {
+    private void getHeader(StringBuilder setOfValuesRepresentation) {
         if (dividend != 0) {
-            getFullHeader(templateRepresentation);
+            getFullHeader(setOfValuesRepresentation);
         } else {
-            getCutHeader(templateRepresentation);
+            getCutHeader(setOfValuesRepresentation);
         }
         pointerPosition = getPointerPosition(firstIntermediateDividend, firstIntermediateDivisor);
 
     }
 
-    private void getCutHeader(StringBuilder templateRepresentation) {
+    private void getCutHeader(StringBuilder setOfValuesRepresentation) {
         String divisorResultSeparator = getDivisorResultSeparator();
 
-        templateRepresentation.append(String.format("%d|%d\n", dividend, divisor));
-        templateRepresentation
+        setOfValuesRepresentation.append(String.format("%d|%d\n", dividend, divisor));
+        setOfValuesRepresentation
                 .append(String.format("%s|%s\n", addSymbols(" ", getCountsOfDigits(dividend)), divisorResultSeparator));
-        templateRepresentation
+        setOfValuesRepresentation
                 .append(String.format("%s|%d\n", addSymbols(" ", getCountsOfDigits(dividend)), finalResult));
     }
 
-    private void getFullHeader(StringBuilder templateRepresentation) {
+    private void getFullHeader(StringBuilder setOfValuesRepresentation) {
         String beforeDivisorIndent = utilityHeaderStrings.get(BEFORE_DIVISOR_INDENT);
         String afterDivisorIndent = utilityHeaderStrings.get(AFTER_DIVISOR_INDENT);
         String divisorResultSeparator = getDivisorResultSeparator();
         String divisorUnderline = utilityHeaderStrings.get(DIVISOR_UNDERLINE);
 
-        templateRepresentation.append(String.format("_%d|%d\n", dividend, divisor));
-        templateRepresentation.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor,
+        setOfValuesRepresentation.append(String.format("_%d|%d\n", dividend, divisor));
+        setOfValuesRepresentation.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor,
                 afterDivisorIndent, divisorResultSeparator));
-        templateRepresentation.append(
+        setOfValuesRepresentation.append(
                 String.format(" %s%s%s|%d\n", beforeDivisorIndent, divisorUnderline, afterDivisorIndent, finalResult));
     }
 
-    private void getDivisionChain(StringBuilder templateRepresentation) {
+    private void getDivisionChain(StringBuilder setOfValuesRepresentation) {
         for (int i = 1; i < intermediateDividends.size(); i++) {
             if (intermediateDividends.get(i) != 0) {
-                templateRepresentation.append(getDivisionBlock(intermediateDividends, intermediateDivisors, i));
+                setOfValuesRepresentation.append(getDivisionBlock(intermediateDividends, intermediateDivisors, i));
                 pointerPosition = getPointerPosition(intermediateDividends.get(i), intermediateDivisors.get(i));
             } else {
                 pointerPosition = getPointerPosition(intermediateDividends.get(i), intermediateDivisors.get(i));
@@ -123,9 +123,9 @@ public class DivisionValuesFormatter {
         return block.toString();
     }
 
-    private void getReminder(StringBuilder templateRepresentation) {
+    private void getReminder(StringBuilder setOfValuesRepresentation) {
         if (dividend != 0) {
-            templateRepresentation
+            setOfValuesRepresentation
                     .append(addSymbols(" ", getCountsOfDigits(dividend) - getCountsOfDigits(finalReminder) + 1)
                             + finalReminder);
         }
