@@ -64,26 +64,36 @@ public class DivisionValuesFormatter {
     }
 
     private void getHeader(StringBuilder templateRepresentation) {
+        if (dividend != 0) {
+            getFullHeader(templateRepresentation);
+        } else {
+            getCutHeader(templateRepresentation);
+        }
+        pointerPosition = getPointerPosition(firstIntermediateDividend, firstIntermediateDivisor);
+
+    }
+
+    private void getCutHeader(StringBuilder templateRepresentation) {
+        String divisorResultSeparator = getDivisorResultSeparator();
+
+        templateRepresentation.append(String.format("%d|%d\n", dividend, divisor));
+        templateRepresentation
+                .append(String.format("%s|%s\n", addSymbols(" ", getCountsOfDigits(dividend)), divisorResultSeparator));
+        templateRepresentation
+                .append(String.format("%s|%d\n", addSymbols(" ", getCountsOfDigits(dividend)), finalResult));
+    }
+
+    private void getFullHeader(StringBuilder templateRepresentation) {
         String beforeDivisorIndent = utilityHeaderStrings.get(BEFORE_DIVISOR_INDENT);
         String afterDivisorIndent = utilityHeaderStrings.get(AFTER_DIVISOR_INDENT);
         String divisorResultSeparator = getDivisorResultSeparator();
         String divisorUnderline = utilityHeaderStrings.get(DIVISOR_UNDERLINE);
 
-        if(dividend != 0) {
         templateRepresentation.append(String.format("_%d|%d\n", dividend, divisor));
-        templateRepresentation.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor, afterDivisorIndent,
-                divisorResultSeparator));
+        templateRepresentation.append(String.format(" %s%d%s|%s\n", beforeDivisorIndent, firstIntermediateDivisor,
+                afterDivisorIndent, divisorResultSeparator));
         templateRepresentation.append(
                 String.format(" %s%s%s|%d\n", beforeDivisorIndent, divisorUnderline, afterDivisorIndent, finalResult));
-        } else {
-            templateRepresentation.append(String.format("%d|%d\n", dividend, divisor));
-            templateRepresentation.append(String.format("%s|%s\n", addSymbols(" ", getCountsOfDigits(dividend)),divisorResultSeparator));
-            templateRepresentation.append(
-                    String.format("%s|%d\n", addSymbols(" ", getCountsOfDigits(dividend)), finalResult));
-        }
-
-        pointerPosition = getPointerPosition(firstIntermediateDividend, firstIntermediateDivisor);
-
     }
 
     private void getDivisionChain(StringBuilder templateRepresentation) {
@@ -111,7 +121,6 @@ public class DivisionValuesFormatter {
         block.append(String.format("%s %s%s\n", generalIndent, divisorIndent, divisorUnderline));
 
         return block.toString();
-
     }
 
     private void getReminder(StringBuilder templateRepresentation) {
