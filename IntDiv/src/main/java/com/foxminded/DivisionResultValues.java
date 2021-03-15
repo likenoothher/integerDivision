@@ -9,10 +9,10 @@ import gnu.trove.list.array.TIntArrayList;
 public final class DivisionResultValues {
     private final int dividend;
     private final int divisor;
-    private final int firstIntermediaeteDividend;
-    private final int firstIntermediaeteDivisor;
-    private final TIntList intermediaeteDividends;
-    private final TIntList intermediaeteDivisors;
+    private final int firstIntermediateDividend;
+    private final int firstIntermediateDivisor;
+    private final TIntList intermediateDividends;
+    private final TIntList intermediateDivisors;
     private final int finalResult;
     private final int finalReminder;
 
@@ -22,65 +22,67 @@ public final class DivisionResultValues {
         this.divisor = Math.abs(divisor);
         this.finalResult = Math.abs(dividend / divisor);
         this.finalReminder = Math.abs(dividend % divisor);
-        this.intermediaeteDividends = getIntermediaeteDividends(this.dividend, this.divisor);
-        this.intermediaeteDivisors = getIntermediaeteDivisors(this.dividend, this.divisor);
-        this.firstIntermediaeteDividend = this.intermediaeteDividends.get(0);
-        this.firstIntermediaeteDivisor = this.intermediaeteDivisors.get(0);
+        this.intermediateDividends = getIntermediateDividends(this.dividend, this.divisor);
+        this.intermediateDivisors = getIntermediateDivisors(this.dividend, this.divisor);
+        this.firstIntermediateDividend = this.intermediateDividends.get(0);
+        this.firstIntermediateDivisor = this.intermediateDivisors.get(0);
     }
 
     public static DivisionResultValues initializeSetOfValuesFields(int dividend, int divisor) {
-        checkDivisor(divisor);
-
         return new DivisionResultValues(dividend, divisor);
     }
 
-    private static TIntList getIntermediaeteDividends(int dividend, int divisor) {
+    private static TIntList getIntermediateDividends(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
-        int intermediaeteDividend = 0;
+        int intermediateDividend = 0;
 
-        TIntList intermediaeteDividends = new TIntArrayList();
+        TIntList intermediateDividends = new TIntArrayList();
 
         for (int i = 0; i < dividendDigits.length; i++) {
-            intermediaeteDividend = intermediaeteDividend * 10 + dividendDigits[i];
+            intermediateDividend = intermediateDividend * 10 + dividendDigits[i];
 
-            if (intermediaeteDividend >= divisor || intermediaeteDividend == 0) {
-                intermediaeteDividends.add(intermediaeteDividend);
-                intermediaeteDividend = intermediaeteDividend % divisor;
+            if (intermediateDividend >= divisor || intermediateDividend == 0) {
+                intermediateDividends.add(intermediateDividend);
+                intermediateDividend = intermediateDividend % divisor;
             }
         }
-        return TCollections.unmodifiableList(intermediaeteDividends);
+        return TCollections.unmodifiableList(intermediateDividends);
 
     }
 
-    private static TIntList getIntermediaeteDivisors(int dividend, int divisor) {
+    private static TIntList getIntermediateDivisors(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
-        int intermediaeteDividend = 0;
+        int intermediateDividend = 0;
 
-        TIntList intermediaeteDivisors = new TIntArrayList();
+        TIntList intermediateDivisors = new TIntArrayList();
 
         for (int i = 0; i < dividendDigits.length; i++) {
-            intermediaeteDividend = intermediaeteDividend * 10 + dividendDigits[i];
+            intermediateDividend = intermediateDividend * 10 + dividendDigits[i];
 
-            if (intermediaeteDividend >= divisor || intermediaeteDividend == 0) {
-                intermediaeteDivisors.add((intermediaeteDividend / divisor) * divisor);
-                intermediaeteDividend = intermediaeteDividend % divisor;
+            if (intermediateDividend >= divisor || intermediateDividend == 0) {
+                intermediateDivisors.add((intermediateDividend / divisor) * divisor);
+                intermediateDividend = intermediateDividend % divisor;
             }
         }
-        return TCollections.unmodifiableList(intermediaeteDivisors);
+        return TCollections.unmodifiableList(intermediateDivisors);
 
     }
 
     private static int[] splitNumber(int number) {
-        if (number == 0) {
-            return new int[] { 0 };
+        if (number <= 9) {
+            return new int[] { number };
         } else {
-            int[] digits = new int[(int) Math.log10(number) + 1];
+            int[] digits = new int[getCountsOfDigits(number)];
             for (int i = 0; i < digits.length; i++) {
                 digits[digits.length - 1 - i] = number % 10;
                 number = number / 10;
             }
             return digits;
         }
+    }
+
+    private static int getCountsOfDigits(int number) {
+        return  (int) (Math.log10(number) + 1);
     }
 
     private static void checkDivisor(int divisor) {
@@ -98,19 +100,19 @@ public final class DivisionResultValues {
     }
 
     public int getFirstIntermediateDividend() {
-        return firstIntermediaeteDividend;
+        return firstIntermediateDividend;
     }
 
     public int getFirstIntermediateDivisor() {
-        return firstIntermediaeteDivisor;
+        return firstIntermediateDivisor;
     }
 
     public TIntList getIntermediateDividends() {
-        return intermediaeteDividends;
+        return intermediateDividends;
     }
 
     public TIntList getIntermediateDivisors() {
-        return intermediaeteDivisors;
+        return intermediateDivisors;
     }
 
     public int getFinalResult() {
@@ -123,8 +125,8 @@ public final class DivisionResultValues {
 
     @Override
     public String toString() {
-        return "setOfValues [dividend=" + dividend + ", divisor=" + divisor + ", intermediaeteDividends="
-                + intermediaeteDividends + ", intermediaeteDivisors=" + intermediaeteDivisors + ", finalResult="
+        return "setOfValues [dividend=" + dividend + ", divisor=" + divisor + ", intermediateDividends="
+                + intermediateDividends + ", intermediateDivisors=" + intermediateDivisors + ", finalResult="
                 + finalResult + ", finalReminder=" + finalReminder + "]";
     }
 
