@@ -2,16 +2,17 @@ package com.foxminded;
 
 import java.util.Objects;
 
+import gnu.trove.TCollections;
 import gnu.trove.list.TIntList;
 import gnu.trove.list.array.TIntArrayList;
 
-public class DivisionResultValues {
+public final class DivisionResultValues {
     private final int dividend;
     private final int divisor;
-    private final int firstIntermediateDividend;
-    private final int firstIntermediateDivisor;
-    private final TIntList intermediateDividends;
-    private final TIntList intermediateDivisors;
+    private final int firstIntermediaeteDividend;
+    private final int firstIntermediaeteDivisor;
+    private final TIntList intermediaeteDividends;
+    private final TIntList intermediaeteDivisors;
     private final int finalResult;
     private final int finalReminder;
 
@@ -21,10 +22,10 @@ public class DivisionResultValues {
         this.divisor = Math.abs(divisor);
         this.finalResult = Math.abs(dividend / divisor);
         this.finalReminder = Math.abs(dividend % divisor);
-        this.intermediateDividends = fillIntermediateDividendArray(this.dividend, this.divisor);
-        this.intermediateDivisors = fillIntermediateDivisorsArray(this.dividend, this.divisor);
-        this.firstIntermediateDividend = this.intermediateDividends.get(0);
-        this.firstIntermediateDivisor = this.intermediateDivisors.get(0);
+        this.intermediaeteDividends = getIntermediaeteDividends(this.dividend, this.divisor);
+        this.intermediaeteDivisors = getIntermediaeteDivisors(this.dividend, this.divisor);
+        this.firstIntermediaeteDividend = this.intermediaeteDividends.get(0);
+        this.firstIntermediaeteDivisor = this.intermediaeteDivisors.get(0);
     }
 
     static DivisionResultValues initializeSetOfValuesFields(int dividend, int divisor) {
@@ -33,7 +34,7 @@ public class DivisionResultValues {
         return new DivisionResultValues(dividend, divisor);
     }
 
-    private static TIntList fillIntermediateDividendArray(int dividend, int divisor) {
+    private static TIntList getIntermediaeteDividends(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
         int intermediaeteDividend = 0;
 
@@ -47,11 +48,11 @@ public class DivisionResultValues {
                 intermediaeteDividend = intermediaeteDividend % divisor;
             }
         }
-        return intermediaeteDividends;
+        return TCollections.unmodifiableList(intermediaeteDividends);
 
     }
 
-    private static TIntList fillIntermediateDivisorsArray(int dividend, int divisor) {
+    private static TIntList getIntermediaeteDivisors(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
         int intermediaeteDividend = 0;
 
@@ -65,7 +66,7 @@ public class DivisionResultValues {
                 intermediaeteDividend = intermediaeteDividend % divisor;
             }
         }
-        return intermediaeteDivisors;
+        return TCollections.unmodifiableList(intermediaeteDivisors);
 
     }
 
@@ -97,27 +98,19 @@ public class DivisionResultValues {
     }
 
     public int getFirstIntermediateDividend() {
-        return firstIntermediateDividend;
+        return firstIntermediaeteDividend;
     }
 
     public int getFirstIntermediateDivisor() {
-        return firstIntermediateDivisor;
-    }
-
-    public void addToIntermediateDividends(int num) {
-        this.intermediateDividends.add(num);
-    }
-
-    public void addToIntermediateDivisors(int num) {
-        this.intermediateDivisors.add(num);
+        return firstIntermediaeteDivisor;
     }
 
     public TIntList getIntermediateDividends() {
-        return new TIntArrayList(intermediateDividends);
+        return intermediaeteDividends;
     }
 
     public TIntList getIntermediateDivisors() {
-        return new TIntArrayList(intermediateDivisors);
+        return intermediaeteDivisors;
     }
 
     public int getFinalResult() {
@@ -130,8 +123,8 @@ public class DivisionResultValues {
 
     @Override
     public String toString() {
-        return "setOfValues [dividend=" + dividend + ", divisor=" + divisor + ", intermediateDividends="
-                + intermediateDividends + ", intermediateDivisors=" + intermediateDivisors + ", finalResult="
+        return "setOfValues [dividend=" + dividend + ", divisor=" + divisor + ", intermediaeteDividends="
+                + intermediaeteDividends + ", intermediaeteDivisors=" + intermediaeteDivisors + ", finalResult="
                 + finalResult + ", finalReminder=" + finalReminder + "]";
     }
 
