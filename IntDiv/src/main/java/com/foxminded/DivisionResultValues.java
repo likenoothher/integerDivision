@@ -28,7 +28,7 @@ public final class DivisionResultValues {
         this.firstIntermediaeteDivisor = this.intermediaeteDivisors.get(0);
     }
 
-    static DivisionResultValues initializeSetOfValuesFields(int dividend, int divisor) {
+    public static DivisionResultValues initializeSetOfValuesFields(int dividend, int divisor) {
         checkDivisor(divisor);
 
         return new DivisionResultValues(dividend, divisor);

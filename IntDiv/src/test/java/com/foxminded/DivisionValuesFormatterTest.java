@@ -13,7 +13,7 @@ public class DivisionValuesFormatterTest {
                   "_20|20\n"
                 + " 20|--\n"
                 + " --|1\n"
-                + "  0";
+                + "  0\n";
         String result = new DivisionValuesFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
@@ -59,7 +59,7 @@ public class DivisionValuesFormatterTest {
                   + "   _25\n"
                   + "    24\n"
                   + "    --\n"
-                  + "     1";
+                  + "     1\n";
         String result = new DivisionValuesFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
@@ -83,7 +83,7 @@ public class DivisionValuesFormatterTest {
                   + "   _25\n"
                   + "    24\n"
                   + "    --\n"
-                  + "     1";
+                  + "     1\n";
         String result = new DivisionValuesFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
@@ -107,7 +107,7 @@ public class DivisionValuesFormatterTest {
                   + "   _25\n"
                   + "    24\n"
                   + "    --\n"
-                  + "     1";
+                  + "     1\n";
         String result = new DivisionValuesFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
@@ -125,7 +125,7 @@ public class DivisionValuesFormatterTest {
                 + "      _1\n"
                 + "       1\n"
                 + "       -\n"
-                + "       0";
+                + "       0\n";
         String result = new DivisionValuesFormatter().getStringRepresentation(template);
         assertEquals(expected, result);
     }
