@@ -8,22 +8,22 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenDividendIsPostiveDivisorIsZero_throwIAException() {
-        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.initializeSetOfValuesFields(1224, 0));
+        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.of(1224, 0));
     }
 
     @Test
     public void whenDividendIsNegativeDivisorIsZero_throwIAException() {
-        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.initializeSetOfValuesFields(-1224, 0));
+        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.of(-1224, 0));
     }
 
     @Test
     public void whenTwoOfComponentsIsZero_throwIAException() {
-        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.initializeSetOfValuesFields(0, 0));
+        assertThrows(IllegalArgumentException.class, () -> DivisionResultValues.of(0, 0));
     }
 
     @Test
     public void whenDividendIsZeroDivisorNeg_thenDivisorPosTemplateIntermediateArraysHasOneZeroValue() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(0, 25);
+        DivisionResultValues result = DivisionResultValues.of(0, 25);
 
         assertEquals(result.getDividend(), 0);
         assertEquals(result.getDivisor(), 25);
@@ -36,7 +36,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenDividendZeroDivisorNeg_thenDivisorPosTemplateIntermediateArraysHasOneZeroValue() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(0, -25);
+        DivisionResultValues result = DivisionResultValues.of(0, -25);
 
         assertEquals(result.getDividend(), 0);
         assertEquals(result.getDivisor(), 25);
@@ -49,7 +49,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenOneIterationDivision_thenTemplateIntermediateArraysHasOneValueOfDivident() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(25, 5);
+        DivisionResultValues result = DivisionResultValues.of(25, 5);
 
         assertEquals(result.getDividend(), 25);
         assertEquals(result.getDivisor(), 5);
@@ -62,7 +62,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenMultiIterationDivision_thenTemplateIntermediateArraysHasFewValues() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(518003, 42);
+        DivisionResultValues result = DivisionResultValues.of(518003, 42);
 
         assertEquals(result.getDividend(), 518003);
         assertEquals(result.getDivisor(), 42);
@@ -77,7 +77,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenMultiIterDivisionOneComponentNeg_thenComponentPosTemplateIntermediateArraysHasFewValues() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(-518003, 42);
+        DivisionResultValues result = DivisionResultValues.of(-518003, 42);
 
         assertEquals(result.getDividend(), 518003);
         assertEquals(result.getDivisor(), 42);
@@ -92,7 +92,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenMultiIterDivisionTwoComponentIsNeg_thenComponentsPosTemplateIntermediateArraysHasFewValues() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(-518003, -42);
+        DivisionResultValues result = DivisionResultValues.of(-518003, -42);
 
         assertEquals(result.getDividend(), 518003);
         assertEquals(result.getDivisor(), 42);
@@ -108,7 +108,7 @@ public class DivisionResultValuesTest {
 
     @Test
     public void whenMultiIterDivisionWithZeroTransReminder_thenTemplateIntermediateArraysHasFewValuesWithZerosIncluded() {
-        DivisionResultValues result = DivisionResultValues.initializeSetOfValuesFields(1001001, 1);
+        DivisionResultValues result = DivisionResultValues.of(1001001, 1);
 
         assertEquals(result.getDividend(), 1001001);
         assertEquals(result.getDivisor(), 1);

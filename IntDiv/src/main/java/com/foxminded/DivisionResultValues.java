@@ -22,17 +22,17 @@ public final class DivisionResultValues {
         this.divisor = Math.abs(divisor);
         this.finalResult = Math.abs(dividend / divisor);
         this.finalReminder = Math.abs(dividend % divisor);
-        this.intermediateDividends = getIntermediateDividends(this.dividend, this.divisor);
-        this.intermediateDivisors = getIntermediateDivisors(this.dividend, this.divisor);
+        this.intermediateDividends = calculateIntermediateDividends(this.dividend, this.divisor);
+        this.intermediateDivisors = calculateIntermediateDivisors(this.dividend, this.divisor);
         this.firstIntermediateDividend = this.intermediateDividends.get(0);
         this.firstIntermediateDivisor = this.intermediateDivisors.get(0);
     }
 
-    public static DivisionResultValues initializeSetOfValuesFields(int dividend, int divisor) {
+    public static DivisionResultValues of(int dividend, int divisor) {
         return new DivisionResultValues(dividend, divisor);
     }
 
-    private static TIntList getIntermediateDividends(int dividend, int divisor) {
+    private static TIntList calculateIntermediateDividends(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
         int intermediateDividend = 0;
 
@@ -50,7 +50,7 @@ public final class DivisionResultValues {
 
     }
 
-    private static TIntList getIntermediateDivisors(int dividend, int divisor) {
+    private static TIntList calculateIntermediateDivisors(int dividend, int divisor) {
         int[] dividendDigits = splitNumber(dividend);
         int intermediateDividend = 0;
 
